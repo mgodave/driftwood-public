@@ -27,10 +27,8 @@ dependencies {
     implementation project(":driftwood-core")
     implementation project(":driftwood-grpc")
     implementation project(":driftwood-prometheus")
-    implementation project(":driftwood-rsocket")
 
     implementation "io.grpc:grpc-netty-shaded"
-    implementation "io.rsocket:rsocket-transport-netty"
     implementation "com.google.inject:guice"
 
     runtimeOnly "org.conscrypt:conscrypt-openjdk-uber"
@@ -47,8 +45,6 @@ dependencies {
     testImplementation "junit:junit"
     testImplementation "org.mockito:mockito-core"
     testImplementation "io.projectreactor:reactor-test"
-    testImplementation "io.rsocket:rsocket-test"
-    testImplementation "io.rsocket:rsocket-transport-local"
 }
 
 task repl(type:Exec) {

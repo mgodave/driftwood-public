@@ -20,7 +20,6 @@ import picocli.CommandLine.Command;
 @Command(
   name = "standalone",
   subcommands = {
-    RSocketStandaloneCommand.class,
     GrpcStandaloneCommand.class
   },
   mixinStandardHelpOptions = true,

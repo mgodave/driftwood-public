@@ -20,8 +20,7 @@ import picocli.CommandLine;
 @CommandLine.Command(
    name = "replicator",
    subcommands = {
-      GrpcReplicatorCommand.class,
-      RSocketReplicatorCommand.class
+      GrpcReplicatorCommand.class
    },
    mixinStandardHelpOptions = true,
    abbreviateSynopsis = true

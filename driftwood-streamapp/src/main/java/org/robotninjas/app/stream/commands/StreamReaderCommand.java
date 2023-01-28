@@ -20,8 +20,7 @@ import picocli.CommandLine.Command;
 @Command(
   name = "reader",
   subcommands = {
-    GrpcReaderCommand.class,
-    RSocketReaderCommand.class
+    GrpcReaderCommand.class
   },
   mixinStandardHelpOptions = true,
   abbreviateSynopsis = true

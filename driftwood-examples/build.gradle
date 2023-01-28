@@ -33,7 +33,6 @@ dependencies {
     implementation project(":driftwood-core")
     implementation project(":driftwood-dropwizard")
     implementation project(":driftwood-grpc")
-    implementation project(":driftwood-rsocket")
     implementation project(":driftwood-test")
     implementation project(":driftwood-transfer")
 
@@ -42,8 +41,6 @@ dependencies {
     implementation "junit:junit"
     implementation "org.mockito:mockito-core"
     implementation "io.projectreactor:reactor-test"
-    implementation "io.rsocket:rsocket-test"
-    implementation "io.rsocket:rsocket-transport-local"
     implementation "org.apache.zookeeper:zookeeper"
 
     implementation 'org.jetbrains.kotlin:kotlin-script-util:1.4.10'

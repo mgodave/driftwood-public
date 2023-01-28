@@ -20,8 +20,7 @@ import picocli.CommandLine.Command;
 @Command(
   name = "writer",
   subcommands = {
-    GrpcWriterCommand.class,
-    RSocketWriterCommand.class
+    GrpcWriterCommand.class
   },
   mixinStandardHelpOptions = true,
   abbreviateSynopsis = true

@@ -35,36 +35,36 @@ import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLMapper;
 
 public interface Codec<T> {
-  static ProtobufCodec protobuf(ProtobufSchema schema) {
-    return new ProtobufCodec(schema);
+  static Protobuf protobuf(ProtobufSchema schema) {
+    return new Protobuf(schema);
   }
 
-  static JsonCodec json() {
-    return new JsonCodec();
+  static Json json() {
+    return new Json();
   }
 
-  static AvroCodec avro(AvroSchema schema) {
-    return new AvroCodec(schema);
+  static Avro avro(AvroSchema schema) {
+    return new Avro(schema);
   }
 
-  static CsvCodec csv(CsvSchema schema) {
-    return new CsvCodec(schema);
+  static Csv csv(CsvSchema schema) {
+    return new Csv(schema);
   }
 
-  static JavaPropsCodec javaProps(JavaPropsSchema schema) {
-    return new JavaPropsCodec(schema);
+  static JavaProps javaProps(JavaPropsSchema schema) {
+    return new JavaProps(schema);
   }
 
-  static TomlCodec toml() {
-    return new TomlCodec();
+  static Toml toml() {
+    return new Toml();
   }
 
-  static YamlCodec yaml() {
-    return new YamlCodec();
+  static Yaml yaml() {
+    return new Yaml();
   }
 
-  static XmlCodec xml() {
-    return new XmlCodec();
+  static Xml xml() {
+    return new Xml();
   }
 
   T deserialize(ByteBuffer bytes) throws IOException;
@@ -99,58 +99,58 @@ public interface Codec<T> {
     }
   }
 
-  record ProtobufCodec(ProtobufMapper mapper, ProtobufSchema schema) implements JacksonSchemaCodec {
+  record Protobuf(ProtobufMapper mapper, ProtobufSchema schema) implements JacksonSchemaCodec {
     private static final ProtobufMapper DefaultMapper = new ProtobufMapper();
-    public ProtobufCodec(ProtobufSchema schema) {
+    public Protobuf(ProtobufSchema schema) {
       this(DefaultMapper, schema);
     }
   }
 
-  record JsonCodec(ObjectMapper mapper) implements JacksonCodec {
+  record Json(ObjectMapper mapper) implements JacksonCodec {
     private static final ObjectMapper DefaultMapper = new ObjectMapper();
-    public JsonCodec() {
+    public Json() {
       this(DefaultMapper);
     }
   }
 
-  record AvroCodec(AvroMapper mapper, AvroSchema schema) implements JacksonSchemaCodec {
+  record Avro(AvroMapper mapper, AvroSchema schema) implements JacksonSchemaCodec {
     private static final AvroMapper DefaultMapper = new AvroMapper();
-    public AvroCodec(AvroSchema schema) {
+    public Avro(AvroSchema schema) {
       this(DefaultMapper, schema);
     }
   }
 
-  record CsvCodec(CsvMapper mapper, CsvSchema schema) implements JacksonSchemaCodec {
+  record Csv(CsvMapper mapper, CsvSchema schema) implements JacksonSchemaCodec {
     private static final CsvMapper DefaultMapper = new CsvMapper();
-    public CsvCodec(CsvSchema schema) {
+    public Csv(CsvSchema schema) {
       this(DefaultMapper, schema);
     }
   }
 
-  record JavaPropsCodec(JavaPropsMapper mapper, JavaPropsSchema schema) implements JacksonSchemaCodec {
+  record JavaProps(JavaPropsMapper mapper, JavaPropsSchema schema) implements JacksonSchemaCodec {
     private static final JavaPropsMapper DefaultMapper = new JavaPropsMapper();
-    public JavaPropsCodec(JavaPropsSchema schema) {
+    public JavaProps(JavaPropsSchema schema) {
       this(DefaultMapper, schema);
     }
   }
 
-  record TomlCodec(TomlMapper mapper) implements JacksonCodec {
+  record Toml(TomlMapper mapper) implements JacksonCodec {
     private static final TomlMapper DefaultMapper = new TomlMapper();
-    public TomlCodec() {
+    public Toml() {
       this(DefaultMapper);
     }
   }
 
-  record YamlCodec(YAMLMapper mapper) implements JacksonCodec {
+  record Yaml(YAMLMapper mapper) implements JacksonCodec {
     private static final YAMLMapper DefaultMapper = new YAMLMapper();
-    public YamlCodec() {
+    public Yaml() {
       this(DefaultMapper);
     }
   }
 
-  record XmlCodec(XmlMapper mapper) implements JacksonCodec {
+  record Xml(XmlMapper mapper) implements JacksonCodec {
     private static final XmlMapper DefaultMapper = new XmlMapper();
-    public XmlCodec() {
+    public Xml() {
       this(DefaultMapper);
     }
   }

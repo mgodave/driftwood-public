@@ -135,11 +135,11 @@ public class TransformTest {
 
   @Test
   public void protobufToJsonWithQuery() throws Exception {
-    Codec.JsonCodec jsonCodec = new Codec.JsonCodec(new ObjectMapper());
+    final var jsonCodec = new Codec.Json(new ObjectMapper());
 
     URL schemaFile = getClass().getClassLoader().getResource("Test.proto");
     ProtobufSchema schema = ProtobufSchemaLoader.std.load(schemaFile);
-    Codec.ProtobufCodec protobufCodec = new Codec.ProtobufCodec(new ProtobufMapper(), schema);
+    final var protobufCodec = new Codec.Protobuf(new ProtobufMapper(), schema);
 
     Flux<ByteBuffer> records = Flux.just(mkBookstore().toByteString().asReadOnlyByteBuffer());
 
@@ -162,7 +162,7 @@ public class TransformTest {
   public void protobufToJsonWithPath() throws Exception {
     URL schemaFile = getClass().getClassLoader().getResource("Test.proto");
     ProtobufSchema schema = ProtobufSchemaLoader.std.load(schemaFile);
-    Codec.ProtobufCodec protobufCodec = protobuf(schema);
+    final var protobufCodec = protobuf(schema);
 
     Flux<ByteBuffer> records = Flux.just(mkBookstore().toByteString().asReadOnlyByteBuffer());
 

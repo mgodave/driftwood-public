@@ -20,7 +20,6 @@ import picocli.CommandLine.Command;
 @Command(
   name = "writeproxy",
   subcommands = {
-    RSocketWriteProxyCommand.class,
     GrpcWriteProxyCommand.class
   },
   mixinStandardHelpOptions = true,

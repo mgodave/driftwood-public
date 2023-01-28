@@ -3,7 +3,6 @@ dependencyManagement {
         imports {
             mavenBom "io.projectreactor:reactor-bom:$reactorVersion"
             mavenBom "io.github.resilience4j:resilience4j-bom:$resilience4jVersion"
-            mavenBom "io.rsocket:rsocket-bom:$rsocketVersion"
             mavenBom "io.grpc:grpc-bom:$grpcVersion"
             mavenBom "com.google.protobuf:protobuf-bom:$protobufVersion"
         }
@@ -46,7 +45,6 @@ dependencyManagement {
         dependency "io.projectreactor.addons:reactor-extra:${reactorAdapterVersion}"
         dependency "io.prometheus:simpleclient_httpserver:${prometheusVersion}"
         dependency "io.prometheus:simpleclient_servlet:${prometheusVersion}"
-        dependency "io.rsocket.rpc:rsocket-rpc-core:${rsocketRpcCore}"
         dependency "io.scalecube:scalecube-cluster:2.6.9"
         dependency "io.scalecube:scalecube-transport:2.2.7"
         dependency "javax.annotation:javax.annotation-api:${javaxAnnotationVersion}"

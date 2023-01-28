@@ -23,9 +23,6 @@ import org.junit.runners.Suite.SuiteClasses;
 @SuiteClasses({
   GrpcEndToEndTest.class,
   GrpcReaderTest.class,
-  GrpcWriterTest.class,
-  RSocketEndToEndTest.class,
-  RSocketReaderTest.class,
-  RSocketWriterTest.class
+  GrpcWriterTest.class
 })
 public class IntegSuite {}

@@ -20,7 +20,6 @@ import picocli.CommandLine;
 @CommandLine.Command(
   name = "readproxy",
   subcommands = {
-    RSocketReadProxyCommand.class,
     GrpcReadProxyCommand.class
   },
   mixinStandardHelpOptions = true,
