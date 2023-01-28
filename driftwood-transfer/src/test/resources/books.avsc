@@ -1,0 +1,27 @@
+{
+  "namespace": "example.avro",
+  "type": "record",
+  "name": "Books",
+  "fields": [
+    {
+      "name": "books",
+      "type": [
+        "null",
+        {
+          "type": "array",
+          "items": {
+            "type": "record",
+            "name": "Book",
+            "fields": [
+              {"name": "category", "type": ["null", "string"]},
+              {"name": "author", "type": ["null", "string"]},
+              {"name": "title", "type": ["null", "string"]},
+              {"name": "isbn", "type": ["null", "string"]},
+              {"name": "price", "type": ["null", "double"]}
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

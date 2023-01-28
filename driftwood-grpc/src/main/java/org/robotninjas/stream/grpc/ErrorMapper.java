@@ -1,0 +1,40 @@
+/**
+ * Copyright [2023] David J. Rusek <dave.rusek@gmail.com>
+ * <p>
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package org.robotninjas.stream.grpc;
+
+import io.grpc.Status;
+import io.grpc.StatusException;
+import io.grpc.StatusRuntimeException;
+import org.apache.shiro.authc.AuthenticationException;
+import org.apache.shiro.authz.AuthorizationException;
+
+interface ErrorMapper {
+  static StatusException toStatus(Throwable t) {
+    if (t instanceof StatusException) {
+      return (StatusException) t;
+    }
+
+    Status status = switch (t) {
+      case StatusRuntimeException e -> e.getStatus();
+      case AuthenticationException ignore -> Status.UNAUTHENTICATED;
+      case AuthorizationException ignore -> Status.PERMISSION_DENIED;
+      case NullPointerException ignore -> Status.INTERNAL;
+      case IllegalArgumentException ignore -> Status.INVALID_ARGUMENT;
+      default -> Status.UNKNOWN;
+    };
+    return new StatusException(status);
+  }
+}

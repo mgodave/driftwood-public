@@ -1,0 +1,13 @@
+syntax = "proto2";
+
+option java_package = "org.robotninjas.stream.proto";
+option optimize_for = SPEED;
+option java_multiple_files = true;
+
+import "Backpressure.proto";
+import "Batching.proto";
+
+message RequestOptions {
+  optional BackPressureStrategy back_pressure_strategy = 1;
+  optional BatchingStrategy batching_strategy = 2;
+}

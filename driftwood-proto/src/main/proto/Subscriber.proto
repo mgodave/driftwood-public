@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+option java_package = "org.robotninjas.stream.proto";
+option optimize_for = SPEED;
+option java_multiple_files = true;
+
+import "Start.proto";
+
+message Stream {
+    string name = 1;
+    string schema = 2;
+}
+
+message Subscriber {
+    string name = 1;
+    Start position = 2;
+    string stream = 3;
+    string filter = 4;
+}

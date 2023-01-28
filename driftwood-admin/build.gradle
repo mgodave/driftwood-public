@@ -1,0 +1,12 @@
+plugins {
+    id 'java-library'
+}
+
+dependencies {
+    api project(":driftwood-api")
+    api project(":driftwood-proto")
+    api "io.projectreactor:reactor-core"
+    api "com.google.guava:guava"
+    implementation 'com.j256.ormlite:ormlite-core:5.3'
+    implementation 'com.j256.ormlite:ormlite-jdbc:5.3'
+}

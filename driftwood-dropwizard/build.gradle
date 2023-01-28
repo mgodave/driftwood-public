@@ -1,0 +1,11 @@
+plugins {
+    id "java-library"
+}
+
+dependencies {
+    implementation project(":driftwood-app")
+    implementation "io.dropwizard.metrics:metrics-core"
+    implementation "io.micrometer:micrometer-core"
+
+    testImplementation "junit:junit"
+}

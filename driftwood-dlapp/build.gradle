@@ -1,0 +1,24 @@
+plugins {
+    id "application"
+}
+
+application {
+    mainClassName = 'org.robotninjas.app.dl.DlTool'
+    applicationName = 'stream'
+    applicationDefaultJvmArgs = ['-XX:+UnlockExperimentalVMOptions', '-XX:+EnableJVMCI', '-XX:+UseJVMCICompiler']
+}
+
+dependencies {
+    implementation project(":driftwood-app")
+    implementation project(":driftwood-core")
+    implementation "io.projectreactor:reactor-core"
+
+    runtimeOnly "ch.qos.logback:logback-classic"
+    // this nonsense is required for bookkeeper metrics
+    runtimeOnly "io.dropwizard.metrics:metrics-graphite"
+
+    testImplementation "junit:junit"
+    testImplementation "org.mockito:mockito-core"
+    testImplementation "io.projectreactor:reactor-test"
+
+}

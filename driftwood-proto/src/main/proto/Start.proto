@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+option java_package = "org.robotninjas.stream.proto";
+option optimize_for = SPEED;
+option java_multiple_files = true;
+
+message Start {
+    message FromOldest {};
+    message FromNewest {};
+    message FromOffset {
+        bytes offset = 1;
+    };
+
+    oneof StartPoint {
+        FromOldest fromOldest = 1;
+        FromNewest fromNewest = 2;
+        FromOffset fromOffset = 3;
+    };
+};

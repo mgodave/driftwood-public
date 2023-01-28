@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+option java_package = "org.robotninjas.stream.proto";
+option optimize_for = SPEED;
+option java_multiple_files = true;
+
+import "Start.proto";
+
+message Replicate {
+    message Record {
+        uint64 txid = 1;
+        bytes data = 2;
+        bytes offset = 3;
+    };
+
+    message Request {
+        string name = 1;
+        Start start = 2;
+    };
+
+    message Transfer {
+        string stream = 1;
+        repeated Record data = 2;
+    };
+
+    message Response {
+        repeated bytes offset = 1;
+    };
+};
+
+service Replicator {
+    rpc Read (Replicate.Request) returns (stream Replicate.Transfer);
+    rpc Write (stream Replicate.Transfer) returns (stream Replicate.Response);
+}

@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+option java_package = "org.robotninjas.stream.proto";
+option optimize_for = SPEED;
+option java_multiple_files = true;
+
+message Range {
+    enum BoundType {
+        OPEN = 0;
+        CLOSED = 1;
+    }
+
+    message Bound {
+        BoundType type = 1;
+        int64 bound = 2;
+    }
+
+    Bound lower_bound = 1;
+    Bound upper_bound = 2;
+}
+
+message RangeSet {
+    repeated Range ranges = 1;
+}

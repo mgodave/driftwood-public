@@ -1,0 +1,19 @@
+plugins {
+    id "java-library"
+}
+
+dependencies {
+    api "info.picocli:picocli"
+    api "io.micrometer:micrometer-core"
+    api "com.google.guava:guava"
+
+    implementation "io.github.mweirauch:micrometer-jvm-extras"
+    implementation "io.projectreactor:reactor-core"
+    implementation "org.slf4j:slf4j-api"
+    implementation "org.apache.shiro:shiro-core"
+
+    testImplementation "junit:junit"
+    testImplementation "org.mockito:mockito-core"
+    testImplementation "io.projectreactor:reactor-test"
+
+}

@@ -1,0 +1,96 @@
+syntax = "proto3";
+
+option java_package = "org.robotninjas.stream.proto";
+option optimize_for = SPEED;
+option java_multiple_files = true;
+
+import "Backpressure.proto";
+
+message Reason {
+    message LocationError {
+        string location = 1;
+    }
+}
+
+message Write {
+    message Record {
+        uint64 txid = 1;
+        bytes data = 2;
+    };
+
+    message Request {
+        string stream = 1;
+        repeated Record data = 2;
+        BackPressureStrategy back_pressure_strategy = 3;
+    };
+
+    message Success {
+        repeated bytes offset = 1;
+    }
+
+    message Failure {
+//        oneof reason {
+//
+//        }
+    }
+
+    message Response {
+        oneof response {
+            Success success = 1;
+            Failure failure = 2;
+        }
+    };
+};
+
+message Truncate {
+    message Request {
+        string stream = 1;
+        bytes offset = 2;
+    };
+
+    message Success {
+        bool success = 1;
+    }
+
+    message Failure {
+//        oneof reason {
+//
+//        }
+    }
+
+    message Response {
+        oneof response {
+            Success success = 1;
+            Failure failure = 2;
+        }
+    };
+};
+
+message MarkEnd {
+    message Request {
+        string stream = 1;
+    };
+
+    message Success {
+        uint64 txid = 2;
+    }
+
+    message Failure {
+//        oneof reason {
+//
+//        }
+    }
+
+    message Response {
+        oneof response {
+            Success success = 1;
+            Failure failure = 2;
+        }
+    };
+};
+
+service WriteProxy {
+    rpc Write (stream Write.Request) returns (stream Write.Response);
+    rpc Truncate (Truncate.Request) returns (Truncate.Response);
+    rpc MarkEnd (MarkEnd.Request) returns (MarkEnd.Response);
+}

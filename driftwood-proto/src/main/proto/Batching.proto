@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+option java_package = "org.robotninjas.stream.proto";
+option optimize_for = SPEED;
+option java_multiple_files = true;
+
+message BatchingStrategy {
+  int32 max_size = 1;
+  int64 max_time_ms = 2;
+}

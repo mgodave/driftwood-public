@@ -1,0 +1,46 @@
+syntax = "proto3";
+
+option java_package = "org.robotninjas.stream.proto";
+option optimize_for = SPEED;
+option java_multiple_files = true;
+
+import "ReadProxy.proto";
+import "WriteProxy.proto";
+
+message Subscribe {
+    message Request {
+        string subscriber = 1;
+    }
+
+    message Response {
+        repeated Read.Record records = 1;
+    }
+}
+
+message Publish {
+    message Request {
+        string topic = 1;
+        repeated Write.Record records= 2;
+    }
+
+    message Response {
+        repeated bytes offsets = 1;
+    }
+}
+
+message Acknowledge {
+    message Request {
+        string subscriber = 1;
+        repeated bytes ack_offsets = 2;
+    }
+
+    message Response {
+
+    }
+}
+
+service Broker {
+    rpc Subscribe (Subscribe.Request) returns (stream Subscribe.Response);
+    rpc Publish (stream Publish.Request) returns (stream Publish.Response);
+    rpc Acknowledge(stream Acknowledge.Request) returns (stream Acknowledge.Response);
+}

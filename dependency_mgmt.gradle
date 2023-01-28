@@ -1,0 +1,73 @@
+dependencyManagement {
+    dependencies {
+        imports {
+            mavenBom "io.projectreactor:reactor-bom:$reactorVersion"
+            mavenBom "io.github.resilience4j:resilience4j-bom:$resilience4jVersion"
+            mavenBom "io.rsocket:rsocket-bom:$rsocketVersion"
+            mavenBom "io.grpc:grpc-bom:$grpcVersion"
+            mavenBom "com.google.protobuf:protobuf-bom:$protobufVersion"
+        }
+
+        dependency("org.apache.distributedlog:distributedlog-core:${bookkeeperVersion}") {
+            exclude "org.apache.bookkeeper:circe-checksum"
+            exclude "org.apache.bookkeeper:cpu-affinity"
+            exclude 'org.slf4j:slf4j-log4j12'
+        }
+
+        dependency("org.apache.bookkeeper:stream-storage-server:${bookkeeperVersion}") {
+            exclude "org.apache.bookkeeper:circe-checksum"
+            exclude "org.apache.bookkeeper:cpu-affinity"
+            exclude 'org.slf4j:slf4j-log4j12'        }
+
+        dependency("co.unruly:java-config-fallback:1.0.0") {
+            exclude "com.amazonaws:aws-java-sdk-secretsmanager"
+        }
+
+        dependency "ch.qos.logback:logback-classic:${logbackVersion}"
+        dependency "com.be-hase.grpc-micrometer:grpc-micrometer:${grpcMicrometerVersion}"
+        dependency "com.github.ben-manes.caffeine:caffeine:${caffeineVersion}"
+        dependency "com.github.jsurfer:jsurfer-core:${jsonSurferVersion}"
+        dependency "com.github.jsurfer:jsurfer-jackson:${jsonSurferVersion}"
+        dependency "com.google.guava:guava:${guavaVersion}"
+        dependency "com.j256.ormlite:ormlite-core:${ormliteVersion}"
+        dependency "com.j256.ormlite:ormlite-jdbc:${ormliteVersion}"
+        dependency "com.jayway.jsonpath:json-path:${jpathVersion}"
+        dependency "com.salesforce.servicelibs:reactor-grpc-stub:${reactiveGrpcVersion}"
+        dependency "info.picocli:picocli:${picocliVersion}"
+        dependency "io.dropwizard.metrics:metrics-core:${dropwizardVersion}"
+        dependency "io.dropwizard.metrics:metrics-graphite:${dropwizardVersion}"
+        dependency "io.github.mweirauch:micrometer-jvm-extras:${micrometerJvmExtras}"
+        dependency "io.github.ykayacan.hashing:hashing-api:0.1.1-SNAPSHOT"
+        dependency "io.github.ykayacan.hashing:hashing-consistent:0.1.1-SNAPSHOT"
+        dependency "io.github.ykayacan.hashing:hashing-rendezvous:0.1.1-SNAPSHOT"
+        dependency "io.micrometer:micrometer-core:${micrometerVersion}"
+        dependency "io.micrometer:micrometer-registry-prometheus:${micrometerVersion}"
+        dependency "io.projectreactor.addons:reactor-adapter:${reactorAdapterVersion}"
+        dependency "io.projectreactor.addons:reactor-extra:${reactorAdapterVersion}"
+        dependency "io.prometheus:simpleclient_httpserver:${prometheusVersion}"
+        dependency "io.prometheus:simpleclient_servlet:${prometheusVersion}"
+        dependency "io.rsocket.rpc:rsocket-rpc-core:${rsocketRpcCore}"
+        dependency "io.scalecube:scalecube-cluster:2.6.9"
+        dependency "io.scalecube:scalecube-transport:2.2.7"
+        dependency "javax.annotation:javax.annotation-api:${javaxAnnotationVersion}"
+        dependency "net.thisptr:jackson-jq:${jacksonJqVersion}"
+        dependency "net.thisptr:jackson-jq-extra:${jacksonJqVersion}"
+        dependency "org.apache.curator:curator-recipes:${curatorVersion}"
+        dependency "org.apache.distributedlog:distributedlog-core-shaded:${bookkeeperVersion}"
+        dependency "org.apache.helix:helix-core:${helixVersion}"
+        dependency "org.awaitility:awaitility:${awaitilityVersion}"
+        dependency "org.conscrypt:conscrypt-openjdk-uber:${conscryptVersion}"
+        dependency "org.junit.jupiter:junit-jupiter:${jupiterVersion}"
+        dependency "org.junit.vintage:junit-vintage-engine:${jupiterVersion}"
+        dependency "org.lz4:lz4-java:${lz4Versionn}"
+        dependency "org.mockito:mockito-core:${mockitoVersion}"
+        dependency "org.openjdk.jmh:jmh-core:${jmhVersion}"
+        dependency "org.slf4j:slf4j-api:${slf4jVersion}"
+        dependency "org.xerial.snappy:snappy-java:${snappyVersion}"
+        dependency "org.apache.zookeeper:zookeeper:${zookeeperVersion}"
+        dependency "org.apache.shiro:shiro-core:${shiroVersion}"
+        dependency "junit:junit:${junitVersion}"
+        dependency "com.google.inject:guice:${guiceVersion}"
+        dependency "io.vavr:vavr:${vavrVersion}"
+    }
+}

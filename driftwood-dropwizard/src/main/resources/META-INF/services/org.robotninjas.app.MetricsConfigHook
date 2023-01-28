@@ -1,0 +1,2 @@
+org.robotninjas.app.metrics.DropwizardConsoleConfigHook
+org.robotninjas.app.metrics.DropwizardCsvConfigHook

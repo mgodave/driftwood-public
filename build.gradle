@@ -1,0 +1,133 @@
+plugins {
+    id "com.diffplug.gradle.spotless" version "3.23.0" apply false
+    id "com.github.hierynomus.license" version "0.16.1" apply false
+    id "com.github.hierynomus.license-report" version "0.15.0" apply false
+    id "com.github.ben-manes.versions" version "0.27.0" apply false
+    id "net.ltgt.errorprone" version "2.0.1" apply false
+    id 'org.javamodularity.moduleplugin' version '1.5.0' apply false
+    id "io.spring.dependency-management" version "1.0.11.RELEASE" apply false
+    id "com.github.mrsarm.jshell.plugin" version "1.2.0" apply false
+}
+
+repositories {
+    mavenCentral()
+    maven { url "https://plugins.gradle.org/m2/" }
+}
+
+subprojects {
+    repositories {
+        mavenLocal()
+        mavenCentral()
+        maven { url "https://plugins.gradle.org/m2/" }
+        maven { url 'https://jitpack.io' }
+        maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
+    }
+
+    apply plugin: "java"
+    apply plugin: "idea"
+    apply plugin: "maven-publish"
+
+    apply plugin: "com.diffplug.gradle.spotless"
+    apply plugin: "com.github.ben-manes.versions"
+    apply plugin: "com.github.hierynomus.license"
+    apply plugin: "com.github.hierynomus.license-report"
+    apply plugin: "net.ltgt.errorprone"
+    apply plugin: 'org.javamodularity.moduleplugin'
+    apply plugin: "io.spring.dependency-management"
+    apply plugin: "com.github.mrsarm.jshell.plugin"
+
+    apply from: "${project.rootDir}/dependency_mgmt.gradle"
+
+    sourceCompatibility = JavaVersion.VERSION_19
+    targetCompatibility = JavaVersion.VERSION_19
+
+    compileJava {
+        options.compilerArgs.addAll(['--release', "$targetCompatibility", '--enable-preview'])
+    }
+
+    compileTestJava {
+        options.compilerArgs.addAll(['--release', "$targetCompatibility", '--enable-preview'])
+    }
+
+    test {
+        jvmArgs += ['--enable-preview']
+    }
+
+    license {
+        header rootProject.file('HEADER')
+
+        strictCheck true
+        ext.year = Calendar.getInstance().get(Calendar.YEAR)
+        ext.name = "David J. Rusek"
+        ext.email = "dave.rusek@gmail.com"
+    }
+
+    task sourcesJar(type: Jar) {
+        from sourceSets.main.allJava
+        archiveClassifier.set('sources')
+    }
+
+    task javadocJar(type: Jar) {
+        from javadoc
+        archiveClassifier.set('javadoc')
+    }
+
+    tasks.withType(JavaCompile).configureEach {
+        javaToolchains.compilerFor {
+            languageVersion = JavaLanguageVersion.of(19)
+        }
+
+        it.options.errorprone {
+            disableWarningsInGeneratedCode = true
+        }
+
+        if (!name.toLowerCase().contains("test")) {
+            it.options.errorprone {
+                it.option("NullAway:AnnotatedPackages", "com.uber")
+            }
+        }
+
+        dependencies {
+            it.annotationProcessor "com.uber.nullaway:nullaway:0.7.10"
+
+            it.compileOnly "com.google.code.findbugs:jsr305:3.0.2"
+            it.errorprone("com.google.errorprone:error_prone_core:2.9.0")
+        }
+    }
+
+    tasks.named("compileTestJava").configure {
+        it.options.errorprone {
+            enabled = false
+        }
+
+        javaToolchains.launcherFor {
+            languageVersion = JavaLanguageVersion.of(19)
+        }
+    }
+
+    publishing {
+        repositories {
+            maven {
+                name = "GitHub"
+                url = uri("https://maven.pkg.github.com/mgodave/driftwood")
+                credentials {
+                    username = "mgodave"
+                    password = System.getenv("GITHUB_TOKEN")
+                }
+            }
+        }
+        afterEvaluate {
+            publications {
+                libJar(MavenPublication) {
+                    from components["java"]
+                    artifact(tasks["sourcesJar"])
+                    pom {
+                        description.set("repro of issue uploading sources jar to github package registry via gradle")
+                    }
+                }
+            }
+        }
+    }
+
+}
+

@@ -1,0 +1,61 @@
+import org.gradle.internal.jvm.Jvm
+
+plugins {
+    id "application"
+}
+
+application {
+    mainClassName = 'org.robotninjas.app.stream.Stream'
+    applicationName = 'stream'
+    applicationDefaultJvmArgs = [
+            '-XX:+UnlockExperimentalVMOptions',
+            '-XX:+EnableJVMCI',
+            '-XX:+UseJVMCICompiler',
+            '--enable-preview'
+    ]
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'org.robotninjas.app.stream.Stream'
+    }
+}
+
+dependencies {
+    implementation project(":driftwood-api")
+    implementation project(":driftwood-app")
+    implementation project(":driftwood-core")
+    implementation project(":driftwood-grpc")
+    implementation project(":driftwood-prometheus")
+    implementation project(":driftwood-rsocket")
+
+    implementation "io.grpc:grpc-netty-shaded"
+    implementation "io.rsocket:rsocket-transport-netty"
+    implementation "com.google.inject:guice"
+
+    runtimeOnly "org.conscrypt:conscrypt-openjdk-uber"
+    runtimeOnly "ch.qos.logback:logback-classic"
+
+    // This is to make distribbutedlog/bookkeeper happy
+    runtimeOnly("com.google.guava:guava") {
+        version {
+            strictly '23.0'
+        }
+    }
+
+    testImplementation "io.grpc:grpc-testing"
+    testImplementation "junit:junit"
+    testImplementation "org.mockito:mockito-core"
+    testImplementation "io.projectreactor:reactor-test"
+    testImplementation "io.rsocket:rsocket-test"
+    testImplementation "io.rsocket:rsocket-transport-local"
+}
+
+task repl(type:Exec) {
+    workingDir projectDir
+    environment "CLASSPATH": sourceSets.main.runtimeClasspath.asPath
+    executable "${Jvm.current().getJavaHome()}/bin/jshell"
+    args "--enable-preview", "--startup", "startup.jsh"
+    standardInput System.in
+    standardOutput System.out
+}

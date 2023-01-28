@@ -1,0 +1,30 @@
+plugins {
+    id "com.google.protobuf" version "${protobufPluginVersion}"
+    id "java-library"
+}
+
+protobuf {
+    protoc { artifact = "com.google.protobuf:protoc:${protocVersion}" }
+    generateProtoTasks {
+        all().each { task ->
+            task.generateDescriptorSet = true
+            task.descriptorSetOptions.includeImports = true
+        }
+    }
+}
+
+dependencies {
+    api "com.google.protobuf:protobuf-java"
+}
+
+jar {
+    exclude("com/google/protobuf/**")
+    exclude("google/protobuf/**")
+}
+
+// do not run errorprone over generated code
+tasks.named("compileJava").configure {
+    it.options.errorprone {
+        enabled = false
+    }
+}

@@ -1,0 +1,9 @@
+dependencies {
+    implementation project(":driftwood-api")
+    implementation project(":driftwood-proto")
+    implementation project(":driftwood-core")
+    implementation "io.vavr:vavr"
+    implementation "io.projectreactor:reactor-test"
+    implementation "org.apache.distributedlog:distributedlog-core"
+    implementation "io.projectreactor:reactor-core"
+}

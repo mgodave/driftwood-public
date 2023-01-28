@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+option java_package = "org.robotninjas.stream.internal.proto";
+option optimize_for = SPEED;
+option java_multiple_files = true;
+
+message Membership {
+    message Member {
+        string member = 1;
+    }
+
+    message Update {
+        Member member = 1;
+    }
+
+    oneof Message {
+        Update update = 1;
+    }
+}

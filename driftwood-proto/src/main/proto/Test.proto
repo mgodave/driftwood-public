@@ -1,0 +1,28 @@
+syntax = "proto2";
+
+option java_package = "org.robotninjas.stream.proto";
+option optimize_for = SPEED;
+option java_multiple_files = true;
+
+message Bookstore {
+    optional Store store = 1;
+    optional double expensive = 3;
+}
+
+message Store {
+    repeated Book book = 1;
+    optional Bicycle bicycle = 2;
+}
+
+message Book {
+    optional string category = 1;
+    optional string author = 2;
+    optional string title = 3;
+    optional string isbn = 4;
+    optional double price = 5;
+}
+
+message Bicycle {
+    optional string color = 1;
+    optional double price = 2;
+}

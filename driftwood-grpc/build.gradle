@@ -1,0 +1,65 @@
+plugins {
+    id "com.google.protobuf" version "${protobufPluginVersion}"
+    id "java-library"
+}
+
+protobuf {
+    protoc { artifact = "com.google.protobuf:protoc:${protocVersion}" }
+    plugins {
+        grpc {
+            artifact = "io.grpc:protoc-gen-grpc-java:${grpcVersion}"
+        }
+        reactor {
+            artifact = "com.salesforce.servicelibs:reactor-grpc:${reactiveGrpcVersion}"
+        }
+    }
+
+    generateProtoTasks {
+        ofSourceSet('main').each { task ->
+            task.builtins {
+                remove java
+            }
+            task.plugins {
+                grpc { }
+                reactor { }
+            }
+        }
+    }
+}
+
+jar {
+    exclude("com/google/protobuf/**")
+    exclude("google/protobuf/**")
+}
+
+test {
+    useJUnitPlatform()
+}
+
+dependencies {
+    api project(":driftwood-api")
+    api project(":driftwood-client")
+    api "com.google.guava:guava"
+    api "io.grpc:grpc-api"
+    api "io.projectreactor:reactor-core"
+
+    implementation project(":driftwood-core")
+    implementation project(":driftwood-proto")
+    implementation "com.be-hase.grpc-micrometer:grpc-micrometer"
+    implementation "io.grpc:grpc-protobuf"
+    implementation "io.grpc:grpc-stub"
+    implementation "org.lz4:lz4-java"
+    implementation "io.micrometer:micrometer-core"
+    implementation "com.salesforce.servicelibs:reactor-grpc-stub"
+    implementation "org.xerial.snappy:snappy-java"
+
+    protobuf project(":driftwood-proto")
+
+    testImplementation project(":driftwood-test")
+    testImplementation "io.grpc:grpc-testing"
+    testImplementation "org.junit.jupiter:junit-jupiter"
+    testImplementation "org.junit.vintage:junit-vintage-engine"
+    testImplementation "junit:junit"
+    testImplementation "org.mockito:mockito-core"
+    testImplementation "io.projectreactor:reactor-test"
+}

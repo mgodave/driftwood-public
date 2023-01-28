@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+option java_package = "org.robotninjas.stream.proto";
+option optimize_for = SPEED;
+option java_multiple_files = true;
+
+enum OverflowStrategy {
+  ERROR = 0;
+  DROP_LATEST = 1;
+  DROP_NEWEST = 2;
+}
+
+message Buffer {
+  int32 max_size = 1;
+  OverflowStrategy overflow_strategy = 2;
+}
+
+message Error {}
+
+message Latest {}
+
+message Drop {}
+
+message BackPressureStrategy {
+  oneof strategy {
+    Buffer buffer = 1;
+    Error error = 2;
+    Latest latest = 3;
+    Drop drop = 4;
+  }
+}

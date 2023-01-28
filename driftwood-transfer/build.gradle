@@ -1,0 +1,40 @@
+plugins {
+    id 'java-library'
+}
+
+dependencies {
+    api project(":driftwood-api")
+    api project(":driftwood-proto")
+
+    api "com.google.guava:guava"
+    api "io.projectreactor:reactor-core"
+    api "io.micrometer:micrometer-core"
+
+    implementation "io.projectreactor.addons:reactor-adapter"
+    implementation "io.projectreactor.addons:reactor-extra"
+    implementation "io.github.resilience4j:resilience4j-cache"
+    implementation "io.github.resilience4j:resilience4j-circuitbreaker"
+    implementation "io.github.resilience4j:resilience4j-micrometer"
+    implementation "io.github.resilience4j:resilience4j-reactor"
+    implementation "io.github.resilience4j:resilience4j-retry"
+    implementation "org.slf4j:slf4j-api"
+    implementation "com.fasterxml.jackson.dataformat:jackson-dataformat-protobuf"
+    implementation "com.fasterxml.jackson.dataformat:jackson-dataformat-avro"
+    implementation "com.fasterxml.jackson.dataformat:jackson-dataformat-csv"
+    implementation "com.fasterxml.jackson.dataformat:jackson-dataformat-yaml"
+    implementation "com.fasterxml.jackson.dataformat:jackson-dataformat-toml"
+    implementation "com.fasterxml.jackson.dataformat:jackson-dataformat-properties"
+    implementation "com.fasterxml.jackson.dataformat:jackson-dataformat-xml"
+    implementation "com.jayway.jsonpath:json-path"
+    implementation "net.thisptr:jackson-jq"
+    implementation "net.thisptr:jackson-jq-extra"
+    implementation "com.github.ben-manes.caffeine:caffeine"
+    implementation "com.github.jsurfer:jsurfer-core"
+    implementation "com.github.jsurfer:jsurfer-jackson"
+
+    testImplementation project(":driftwood-test")
+    testImplementation "junit:junit"
+    testImplementation "org.mockito:mockito-core"
+    testImplementation "io.projectreactor:reactor-test"
+    testImplementation "org.awaitility:awaitility"
+}

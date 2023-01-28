@@ -1,0 +1,18 @@
+dependencies {
+    implementation project(":driftwood-api")
+    implementation project(":driftwood-app")
+    implementation project(":driftwood-core")
+    implementation project(":driftwood-dlapp")
+    implementation project(":driftwood-grpc")
+    implementation project(":driftwood-rsocket")
+    implementation project(":driftwood-streamapp")
+
+    implementation "org.awaitility:awaitility"
+    implementation "org.apache.distributedlog:distributedlog-core"
+    implementation "io.grpc:grpc-testing"
+    implementation "junit:junit"
+    implementation "io.rsocket:rsocket-test"
+    implementation "io.rsocket:rsocket-transport-local"
+
+    runtimeOnly "ch.qos.logback:logback-classic"
+}

@@ -1,0 +1,17 @@
+version: '2'
+
+services:
+
+  zookeeper:
+    image: zookeeper:latest
+    hostname: zookeeper
+
+  bookie:
+    image: apache/bookkeeper:latest
+    links:
+      - zookeeper
+    environment:
+      - JAVA_HOME=/usr/lib/jvm/jre-1.8.0
+      - BK_zkServers=zookeeper:2181
+      - BK_zkLedgersRootPath=/ledgers
+

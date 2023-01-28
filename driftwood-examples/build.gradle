@@ -1,0 +1,59 @@
+plugins {
+    id "application"
+    id "java-library"
+    id "org.jetbrains.kotlin.jvm" version "1.4.10"
+}
+
+application {
+    mainClassName = 'org.robotninjas.stream.examples.DriftwoodScripting'
+    applicationName = 'stream'
+    applicationDefaultJvmArgs = [
+            '-XX:+UnlockExperimentalVMOptions',
+            '-XX:+EnableJVMCI',
+            '-XX:+UseJVMCICompiler',
+            '--enable-preview'
+    ]
+}
+
+compileKotlin {
+    kotlinOptions {
+        jvmTarget = "15"
+    }
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'org.robotninjas.stream.examples.DriftwoodScripting'
+    }
+}
+
+dependencies {
+    implementation project(":driftwood-api")
+    implementation project(":driftwood-app")
+    implementation project(":driftwood-core")
+    implementation project(":driftwood-dropwizard")
+    implementation project(":driftwood-grpc")
+    implementation project(":driftwood-rsocket")
+    implementation project(":driftwood-test")
+    implementation project(":driftwood-transfer")
+
+    implementation "io.projectreactor.addons:reactor-extra"
+    implementation "io.grpc:grpc-testing"
+    implementation "junit:junit"
+    implementation "org.mockito:mockito-core"
+    implementation "io.projectreactor:reactor-test"
+    implementation "io.rsocket:rsocket-test"
+    implementation "io.rsocket:rsocket-transport-local"
+    implementation "org.apache.zookeeper:zookeeper"
+
+    implementation 'org.jetbrains.kotlin:kotlin-script-util:1.4.10'
+    implementation 'org.jetbrains.kotlin:kotlin-script-runtime:1.4.10'
+    implementation 'org.jetbrains.kotlin:kotlin-compiler-embeddable:1.4.10'
+    implementation 'org.jetbrains.kotlin:kotlin-scripting-compiler-embeddable:1.4.10'
+
+    implementation 'com.j256.ormlite:ormlite-core:5.3'
+    implementation 'com.j256.ormlite:ormlite-jdbc:5.3'
+
+//    implementation 'net.java.dev.jna:jna:5.7.0'
+
+}
