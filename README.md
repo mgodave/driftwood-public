@@ -1,3 +1,5 @@
+DO NOT USE - This is constantly in a state of broken as I experiment with things.
+
 This is a project I have worked on privately for the last few years. Originally it supported grpc and rsocket but lately the rsocket reactive rpc bindings have fallen into disrepair and there is very little appetite for their use so I dropped support. In general this project is just a lot of unfinished ideas; an excuse for me to use DistributedLog once again, and try some silly ideas out in an interesting space. Lots of stuff doesn't work or isn't tested but if you would like to chat about some of these ideas lmk, I'd be happy to share some of my misadventures.
 
 =========================================================
